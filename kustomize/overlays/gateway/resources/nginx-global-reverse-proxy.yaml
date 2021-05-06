@@ -1,0 +1,65 @@
+# ----- this behave like an ingress but its not an official ingress
+# all ingress controllers are using api-resource-groups not offered 
+# on k8s 1.13.X
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nginx
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  namespace: nginx
+spec:
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:1.19.10
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: nginx-html-volume
+          mountPath: /etc/nginx-html
+        - name: nginx-config-volume
+          mountPath: /etc/nginx/conf.d
+          
+      volumes:
+      - name: nginx-config-volume
+        configMap:
+          name: nginx-config
+          items:
+          - key: default.conf
+            path: default.conf
+      - name: nginx-html-volume
+        configMap:
+          name: nginx-config
+          items:
+          - key: index.html
+            path: index.html
+          - key: 50x.html
+            path: 50x.html
+---
+kind: Service
+apiVersion: v1
+metadata:
+  labels:
+    app: nginx
+  name: nginx-service
+  namespace: nginx
+spec:
+  type: NodePort
+  ports:
+    - name: http
+      port: 80
+      nodePort: 30001
+  selector:
+    app: nginx

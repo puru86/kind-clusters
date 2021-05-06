@@ -2,7 +2,7 @@
 
 clear && clear 
 
-CLUSTER_NAME="1.13.12-plain"
+CLUSTER_NAME="1.13.12-gateway"
 
 echo ====================================================
 echo Creating Cluster ${CLUSTER_NAME}
@@ -18,16 +18,17 @@ kind get clusters
 
 echo ====================================================
 echo Applying Kubernetes Manifests
-echo Using overlays/plain
+echo Using overlays/gateway
 echo ====================================================
 
-kubectl apply -k kustomize/overlays/plain/
+kubectl apply -k kustomize/overlays/gateway/
 
 echo ====================================================
 echo Waiting on deployment roll-out
 echo ====================================================
 
 kubectl rollout status deployment/kubernetes-dashboard -n kube-system
+kubectl rollout status deployment/nginx-deployment -n nginx
 
 echo ====================================================
 echo All Kubernetes Assets
@@ -45,7 +46,8 @@ echo ====================================================
 echo What next?
 echo ----------------------------------------------------
 echo API Server is available at https://127.0.0.1:16443/
-echo Kubernetes Dashboard will be available at https://127.0.0.1:18001/
+echo nginx-service is available at http://127.0.0.1:18001/
+echo Kubernetes Dashboard will be available at http://127.0.0.1:18001/kube-system/kubernetes-dashboard/
 echo ====================================================
 
 echo ====================================================
