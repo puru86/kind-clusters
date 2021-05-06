@@ -28,6 +28,7 @@ bash create-cluster-1.13.12-plain.sh
 
 The cluster will include:
 - The `kind cluster` for the appropriate Kubernetes Version.
+- The `api-server` running at `https://127.0.0.1:16443`
 - A `serviceaccount` named `dev-admin` with full access to the cluster.
 - The `kubernetes-dashboard` service deployed and mapped to `https://127.0.0.1:18001`
 - Configured with additional port mappings:
@@ -50,6 +51,7 @@ bash create-cluster-1.13.12-gateway.sh
 
 The cluster will include:
 - The `kind cluster` for the appropriate Kubernetes Version.
+- The `api-server` running at `https://127.0.0.1:16443`
 - A `serviceaccount` named `dev-admin` with full access to the cluster.
 - A `nginx-service` that behaves as a gateway (really a reverse proxy) mapped to `http://127.0.0.1:18001`
 - The `kubernetes-dashboard` service deployed and reverse proxied at `http://127.0.0.1:18001/kube-system/kubernetes-dashboard/`
@@ -77,6 +79,7 @@ The host (in my case a Mac) docker will be configured with:
 
 The cluster will include:
 - The `kind cluster` for the appropriate Kubernetes Version.
+- The `api-server` running at `https://127.0.0.1:16443`
 - A `serviceaccount` named `dev-admin` with full access to the cluster.
 - Configuration to allow `kind cluster` to connect to the local registry.
 - A `nginx-service` that behaves as a gateway (reverse-proxy) mapped to `http://127.0.0.1:18001`

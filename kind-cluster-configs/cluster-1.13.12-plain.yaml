@@ -1,0 +1,45 @@
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: "1.13.12-plain"
+networking:
+  ipFamily: ipv4
+  apiServerAddress: 127.0.0.1
+  apiServerPort: 16443
+nodes:
+- role: control-plane
+  image: kindest/node:v1.13.12
+  extraPortMappings:
+  - containerPort: 30001
+    hostPort: 18001
+    protocol: TCP
+  - containerPort: 30002
+    hostPort: 18002
+    protocol: TCP
+  - containerPort: 30003
+    hostPort: 18003
+    protocol: TCP
+  - containerPort: 30004
+    hostPort: 18004
+    protocol: TCP
+  - containerPort: 30005
+    hostPort: 18005
+    protocol: TCP
+  - containerPort: 30006
+    hostPort: 18006
+    protocol: TCP
+  - containerPort: 30007
+    hostPort: 18007
+    protocol: TCP
+  - containerPort: 30008
+    hostPort: 18008
+    protocol: TCP
+  - containerPort: 30009
+    hostPort: 18009
+    protocol: TCP
+  - containerPort: 30010
+    hostPort: 18010
+    protocol: TCP
+  - containerPort: 30011
+    hostPort: 18011
+    protocol: TCP
+    
