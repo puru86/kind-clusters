@@ -8,20 +8,23 @@ These are development only cluster configurations. I hardly ever will make the e
 
 I am creating these clusters to experiment with webhooks, third party tools, third party addons and to understand Kubernetes internals like lifecycles.
 
-# Branches
-In this repository I am trying to create clusters for different versions of Kubernetes. 
+# Uses Kubernetes 1.13.12
+This version uses Kubernetes 1.13.12
 
-Different versions of kubernetes are supported using different branches.
-
-For example: `version/1.13.12` builds clusters for Kubernetes 1.13.12
-
-`master` will remain empty to avoid confusion!
+# Pre-requisites
+Requires the following on your host:
+1. Docker 
+2. Kind (https://kind.sigs.k8s.io/)
+3. Kubectl (Any version with Kustomize support)
 
 # Clusters
-I try to provide three types of clusters:
+Provision for the following clusters:
 
-## `{version}-plain`
-For example: `1.13.12-plain`
+## `1.13.12-plain`
+To create cluster run:
+```
+bash create-cluster-1.13.12-plain.sh
+```
 
 The cluster will include:
 - The `kind cluster` for the appropriate Kubernetes Version.
@@ -39,8 +42,11 @@ The cluster will include:
     - 18010 (host) : 30010 (cluster)
     - 18011 (host) : 30011 (cluster)
 
-## `{version}-gateway`
-For example: `1.13.12-gateway`
+## `1.13.12-gateway`
+To create cluster run:
+```
+bash create-cluster-1.13.12-gateway.sh
+```
 
 The cluster will include:
 - The `kind cluster` for the appropriate Kubernetes Version.
@@ -59,8 +65,11 @@ The cluster will include:
     - 18010 (host) : 30010 (cluster)
     - 18011 (host) : 30011 (cluster)
 
-## `{version}-registry`
-For example: `1.13.12-registry`
+## `1.13.12-registry`
+To create cluster run:
+```
+bash create-cluster-1.13.12-registry.sh
+```
 
 The host (in my case a Mac) docker will be configured with:
 - Container called `kind-registry`, running image `registry:2`, exposed at `localhost:5000`.
